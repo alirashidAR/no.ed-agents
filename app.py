@@ -18,5 +18,5 @@ model = HfApiModel(model_id=model_id)
 agent = CodeAgent(tools=[], model=model, add_base_tools=True)
 
 agent.run(
-    "Could you give me the 118th number in the Fibonacci sequence?",
+    "Add two numbers",
 )

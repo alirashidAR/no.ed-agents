@@ -2,6 +2,7 @@ from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from agent.agent import create_roadmap  # Assuming this is the correct import
+from agent.job_agent import find_job_openings
 from tools.recommend import get_recommended_roles
 import uvicorn
 import os
@@ -29,6 +30,11 @@ class RoadmapRequest(BaseModel):
 class RecommendRolesRequest(BaseModel):
     tags: str
 
+class RecommendJobsRequest(BaseModel):
+    roles: str
+    experience_level: str
+
+
 @app.get("/")
 async def root():
     return {"message": "Welcome to the Roadmap Generator!"}
@@ -42,6 +48,11 @@ async def generate_roadmap(request: RoadmapRequest):
 async def generate_roles(request: RecommendRolesRequest):
     roles = get_recommended_roles(GEMINI_API_KEY, request.tags)
     return roles
+
+@app.post('/recommend_jobs')
+async def generate_jobs(request: RecommendJobsRequest):
+    jobs = find_job_openings(request.roles, request.experience_level)
+    return jobs
 
 if __name__ == "__main__":
     uvicorn.run(app, host="127.0.0.1", port=8000)

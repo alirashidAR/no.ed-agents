@@ -25,5 +25,5 @@ def get_recommended_roles(api_key, tags):
         },
     )
 
-    return response.text
+    print(response.text)
 

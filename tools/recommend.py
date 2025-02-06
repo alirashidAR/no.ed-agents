@@ -1,5 +1,10 @@
 import json
 from google import genai
+from pydantic import BaseModel, TypeAdapter
+
+
+class Roles(BaseModel):
+  role : str
 
 def get_recommended_roles(api_key, tags):
     prompt = f'''List 4 roles that align with 
@@ -14,16 +19,11 @@ def get_recommended_roles(api_key, tags):
     response = client.models.generate_content(
         model='gemini-2.0-flash',
         contents=prompt,
+        config={
+            'response_mime_type': 'application/json',
+            'response_schema': list[Roles],
+        },
     )
 
-    response_text = response.text.strip()
+    return response.text
 
-    try:
-        # Convert JSON string to a Python list if already in JSON format
-        roles_list = json.loads(response_text)
-    except json.JSONDecodeError:
-        # Fallback: If it's not a proper JSON string, try evaluating safely
-        import ast
-        roles_list = ast.literal_eval(response_text)
-
-    return json.dumps(roles_list)  # Convert to JSON string

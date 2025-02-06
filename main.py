@@ -21,8 +21,8 @@ async def generate_roadmap(resume: str, role: str):
     return roadmap
 
 @app.post("/recommend_roles")
-async def generate_roles(tags: list[str]):
-    roles = get_recommended_roles(GEMINI_API_KEY,tags)
+async def generate_roles(tags: str):
+    roles = get_recommended_roles(GEMINI_API_KEY, tags)
     return roles
 
 if __name__ == "__main__":

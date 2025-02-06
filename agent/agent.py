@@ -52,9 +52,9 @@ manager_agent = CodeAgent(
 #     "tech_stack": ["Python", "TensorFlow", "Scikit-learn"],
 # }
 
-answer_format = [
+answer_format = '''
     {
-        "answer": {
+        "answer": [{
             "id": 1,
             "topic": "Python",
             "subtopics": ["Data Types", "Control Structures", "Functions", "Classes"],
@@ -62,9 +62,10 @@ answer_format = [
             "courses_courses": ["coursera_course_link1", "coursera_course_link2"],
             "projects_to_do": ["A data analysis project", "A simple web application"],
             "outcome_of_learning_30_words": "You will be able to write clean and efficient code in Python and understand the basics of programming.",
-        }
+        },
+        ]
     }
-]
+'''
 
 
 async def create_roadmap(resume:str, role:str):

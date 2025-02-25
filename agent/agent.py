@@ -1,7 +1,6 @@
 from smolagents import (
     CodeAgent,
     ToolCallingAgent,
-    HfApiModel,
     ManagedAgent,
     DuckDuckGoSearchTool,
     LiteLLMModel,

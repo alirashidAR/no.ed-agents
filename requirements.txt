@@ -1,6 +1,7 @@
 google-genai
 requests
-smolagents
+smolagents==1.7.0
+smolagents[litellm]
 fastapi
 uvicorn
 python-dotenv

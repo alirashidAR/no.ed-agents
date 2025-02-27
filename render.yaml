@@ -6,8 +6,8 @@ services:
     buildCommand: |
       pip install -r requirements.txt
       pip install huggingface_hub
-    startCommand: |
       huggingface-cli login --token $HUGGINGFACE_TOKEN
+    startCommand: |
       python main.py
     envVars:
       - key: HUGGINGFACE_TOKEN

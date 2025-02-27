@@ -1,17 +1,13 @@
 services:
-  # A Docker web service
-  - type: web
-    name: fastapi-example
-    runtime: python
-    plan: free
-    autoDeploy: false
-    buildCommand: pip install -r requirements.txt
-    startCommand: python main.pyservices:
   - type: web
     name: huggingface-service
     runtime: python
     env: python
     buildCommand: |
       pip install -r requirements.txt
+      pip install huggingface_hub
     startCommand: |
       huggingface-cli login --token $HUGGINGFACE_TOKEN && python main.py
+    envVars:
+      - key: HUGGINGFACE_TOKEN
+        sync: false

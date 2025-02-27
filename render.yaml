@@ -6,4 +6,12 @@ services:
     plan: free
     autoDeploy: false
     buildCommand: pip install -r requirements.txt
-    startCommand: python main.py
+    startCommand: python main.pyservices:
+  - type: web
+    name: huggingface-service
+    runtime: python
+    env: python
+    buildCommand: |
+      pip install -r requirements.txt
+    startCommand: |
+      huggingface-cli login --token $HUGGINGFACE_TOKEN && python main.py

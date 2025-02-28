@@ -2,9 +2,22 @@ import re
 import requests
 from markdownify import markdownify
 from requests.exceptions import RequestException
-from smolagents import tool, CodeAgent, ToolCallingAgent, HfApiModel, ManagedAgent, DuckDuckGoSearchTool
+from smolagents import tool, CodeAgent, DuckDuckGoSearchTool,LiteLLMModel
+from dotenv import load_dotenv
+import os
 
-model_id = "Qwen/Qwen2.5-Coder-32B-Instruct"
+load_dotenv()
+
+
+OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")
+
+
+
+model= LiteLLMModel(
+    model_id='openrouter/qwen/qwen2.5-vl-72b-instruct:free',
+    api_key=OPENROUTER_API_KEY,
+    api_base="https://openrouter.ai/api/v1",
+)
 
 @tool
 def visit_webpage(url: str) -> str:
@@ -60,7 +73,7 @@ def find_job_openings(role: str, experience_level: str) -> list[str]:
     Returns:
         A list of URLs for the job openings.
     """
-    model = HfApiModel(model_id)
+    # model = HfApiModel(model_id)
 
     manager_agent = CodeAgent(
         tools=[DuckDuckGoSearchTool()],
@@ -69,7 +82,7 @@ def find_job_openings(role: str, experience_level: str) -> list[str]:
         additional_authorized_imports=["time", "numpy", "pandas"],
     )
 
-    query = f"Give me the latest job openings in India for the following role with {experience_level} experience: {role}. Return the links for the job openings."
+    query = f"Give me the latest job openings in India for the following role with {experience_level} experience: {role}. Return the links for the job openings.Get correct links only."
     
     answer = manager_agent.run(query)
 

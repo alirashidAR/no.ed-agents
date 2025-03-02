@@ -58,9 +58,9 @@ answer_format = '''
             "topic": "Python",
             "subtopics": ["Data Types", "Control Structures", "Functions", "Classes"],
             "duration": "3-4 weeks",
-            "courses_courses": ["coursera_course_link1", "coursera_course_link2"],
-            "projects_to_do": ["A data analysis project", "A simple web application"],
-            "outcome_of_learning_30_words": "You will be able to write clean and efficient code in Python and understand the basics of programming.",
+            "courses": ["coursera_course_link1", "coursera_course_link2"],
+            "projects": ["A data analysis project", "A simple web application"],
+            "outcome": "You will be able to write clean and efficient code in Python and understand the basics of programming.",
         },
         ]
     }

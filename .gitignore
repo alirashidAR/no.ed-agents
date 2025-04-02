@@ -3,3 +3,7 @@ myvenv
 __pycache__
 .vscode
 test.py
+
+
+
+node_modules
